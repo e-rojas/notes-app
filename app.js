@@ -3,11 +3,11 @@ const yargs = require("yargs");
 const notes = require("./notes");
 //Create add command
 /* 
-Challenge
-1. Load existing notes
-2. Use array filter to remove the matching not if any?
-3. Save the newly created array
-4. Test your work with a title that exist and title that doesn't
+1. create an export listNotes from notes.js
+2. style your notes using chalk
+3. print notes title for each note
+4 call listNotes from command handler
+5. Test your work!!
 */
 yargs.command({
   command: "add",
@@ -52,7 +52,7 @@ yargs.command({
   command: "list",
   describe: "listing the notes",
   handler: function() {
-    console.log("listing all notes");
+    notes.listNotes()
   }
 });
 //Create a read commmand

@@ -55,10 +55,18 @@ const removeNote = function(title) {
     console.log(chalk.bgRed.bold(`Note removed from DB with title: ${title}`));
   }
 };
-
+const listNotes = ()=>{
+    let notes = loadNotes()
+    console.log(chalk.inverse.bgCyan(' Your Notes: \n'));
+  notes.forEach(note => {
+    console.log(`Title: ${chalk.magentaBright(note.title)}\n Body: ${chalk.yellow(note.body)} \n **************`);  
+  });
+ 
+}
 //export functions
 module.exports = {
   getNotes,
   addNote,
-  removeNote
+  removeNote,
+  listNotes
 };
