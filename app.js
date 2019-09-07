@@ -41,7 +41,7 @@ yargs.command({
     }
   },
   handler: function(argv) {
-      notes.removeNote(argv.title)
+    notes.removeNote(argv.title);
     //console.log(notes.removeNote(argv.title));
     //console.log((chalk.keyword('orange')('Title: of note to be removed => ',argv.title)));
     //console.log('removing the note');
@@ -52,15 +52,23 @@ yargs.command({
   command: "list",
   describe: "listing the notes",
   handler: function() {
-    notes.listNotes()
+    notes.listNotes();
   }
 });
 //Create a read commmand
 yargs.command({
   command: "read",
-  describe: "reading all notes",
-  handler: function() {
-    console.log("reading all notes");
+  describe: "reading a note",
+  builder: {
+    title: {
+      describe: "Read a note",
+      demandOption: true,
+      type: "string"
+    }
+  },
+
+  handler: function(argv) {
+    notes.readNote(argv.title);
   }
 });
 //console.log(yargs.argv);

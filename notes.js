@@ -8,10 +8,10 @@ const getNotes = function() {
 //adding a note function
 const addNote = function(title, body) {
   const notes = loadNotes();
-  const duplicateNotes = notes.filter(function(note) {
-    return note.title === title;
-  });
-  if (duplicateNotes.length === 0) {
+
+  const duplicateNote = notes.find(note => note.title === title);
+
+  if (!duplicateNote) {
     notes.push({
       title: title,
       body: body
@@ -55,18 +55,38 @@ const removeNote = function(title) {
     console.log(chalk.bgRed.bold(`Note removed from DB with title: ${title}`));
   }
 };
-const listNotes = ()=>{
-    let notes = loadNotes()
-    console.log(chalk.inverse.bgCyan(' Your Notes: \n'));
+const listNotes = () => {
+  let notes = loadNotes();
+  console.log(chalk.inverse.bgCyan(" Your Notes: \n"));
   notes.forEach(note => {
-    console.log(`Title: ${chalk.magentaBright(note.title)}\n Body: ${chalk.yellow(note.body)} \n **************`);  
+    console.log(
+      `Title: ${chalk.magentaBright(note.title)}\n Body: ${chalk.yellow(
+        note.body
+      )} \n **************`
+    );
   });
- 
+};
+//Create a readNote function
+const readNote = (title)=>{
+    const notes = loadNotes()
+    const noteFound = notes.find(e => e.title === title )
+    if(noteFound){
+        console.log(chalk.inverse.bgCyan(" Your Note: \n"));
+        console.log(
+            `Title: ${chalk.magentaBright(noteFound.title)}\n Body: ${chalk.yellow(
+              noteFound.body
+            )} \n **************`
+          );  
+    }else{
+        console.log(chalk.green("No note found with title: " + title));
+
+    }
 }
 //export functions
 module.exports = {
   getNotes,
   addNote,
   removeNote,
-  listNotes
+  listNotes,
+  readNote
 };
